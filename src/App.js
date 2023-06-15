@@ -83,7 +83,7 @@ export default function App() {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <ul className="myMenu">
         {list.map((item, i) => (
           <li className="nav-item " key={i} ref={navRefs.current[i]}>
