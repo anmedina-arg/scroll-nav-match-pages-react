@@ -1,0 +1,20 @@
+.listTop {
+  white-space: nowrap;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #fadaae;
+  text-decoration: none;
+  font-size: 2rem;
+  text-transform: uppercase;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out;
+  margin-inline: 0.5rem;
+}
+.text-danger {
+  border-bottom: 4px solid #fadaae;
+  box-shadow: 0 0 10px 0px #fadaae;
+  border-radius: 10px;
+}

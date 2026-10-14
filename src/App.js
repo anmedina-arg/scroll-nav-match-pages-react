@@ -1,27 +1,18 @@
 import "./App.css";
 
 import React, { createRef, useRef, useState, useEffect } from "react";
+import NavBar from "./components/navbar/navbar";
+import Card from "./components/card/card";
+
+import { list } from "./mock/mock";
 
 var scrolling = false;
 
 export default function App() {
-  const scrollRefs = useRef([]);
-  const navRefs = useRef([]);
-
   const [active, setActive] = useState(0);
 
-  const list = [
-    "Item 1",
-    "Item 2",
-    "Item 3",
-    "Item 4",
-    "Item 5",
-    "Item 6",
-    "Item 7",
-    "Item 8",
-    "Item 9",
-    "Item 10",
-  ];
+  const scrollRefs = useRef([]);
+  const navRefs = useRef([]);
 
   scrollRefs.current = [...Array(list.length).keys()].map(
     (_, i) => scrollRefs.current[i] ?? createRef()
@@ -76,9 +67,9 @@ export default function App() {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", scrollHandler, true);
+    window.addEventListener("scroll", scrollHandler);
     return () => {
-      window.removeEventListener("scroll", scrollHandler, true);
+      window.removeEventListener("scroll", scrollHandler);
     };
   }, []);
 
@@ -86,31 +77,20 @@ export default function App() {
     <div className="container">
       <ul className="myMenu">
         {list.map((item, i) => (
-          <li className="nav-item " key={i} ref={navRefs.current[i]}>
-            <a
-              href={`#s-${i}`}
-              className={`nav-link listTop ${
-                active === i ? "text-danger" : ""
-              }`}
-              onClick={(e) => {
-                scrollTo(i);
-              }}
-            >
-              {item}
-            </a>
-          </li>
+          <NavBar
+            key={i}
+            item={item}
+            index={i}
+            navRefs={navRefs}
+            active={active}
+            scrollTo={scrollTo}
+          />
         ))}
       </ul>
 
       <ul className="mb-100">
         {list.map((item, i) => (
-          <li id={`s-${i}`} ref={scrollRefs.current[i]} className="py-100">
-            <h3>{item}</h3>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi,
-              dicta.
-            </p>
-          </li>
+          <Card key={i} item={item} index={i} scrollRefs={scrollRefs} />
         ))}
       </ul>
     </div>
